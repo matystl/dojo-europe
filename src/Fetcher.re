@@ -1,7 +1,14 @@
-[@bs.deriving abstract]
-type data = {
+type marker = {
   username: string,
   location: (float, float),
+};
+
+module Data = {
+  [@bs.deriving abstract]
+  type t = {
+    username: string,
+    location: (float, float),
+  };
 };
 
 type response1;
@@ -26,7 +33,20 @@ external then1 : (promise(response1), response1 => 'a) => promise('a) =
   "then";
 
 [@bs.send]
-external then2 : (promise(array(data)), array(data) => unit) => unit =
+external then2 : (promise(array(Data.t)), array(Data.t) => unit) => unit =
   "then";
 
-let fetchGet = (~url, ~cb) => then2(then1(fetchGet(url), json), cb);
+let convertToRecord: array(Data.t) => array(marker) =
+  dataArray =>
+    Array.map(
+      data => {
+        username: data |. Data.username,
+        location: data |. Data.location,
+      },
+      dataArray,
+    );
+
+let fetchGet = (~url, ~cb) =>
+  then2(then1(fetchGet(url), json), rawData =>
+    cb(convertToRecord(rawData))
+  );

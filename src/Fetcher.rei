@@ -1,5 +1,4 @@
-[@bs.deriving abstract]
-type data = {
+type marker = {
   username: string,
   location: (float, float),
 };
@@ -7,4 +6,4 @@ type data = {
 /* Make a POST request. */
 let fetchPost: (~url: string, ~body: string) => unit;
 
-let fetchGet: (~url: string, ~cb: array(data) => unit) => unit;
+let fetchGet: (~url: string, ~cb: array(marker) => unit) => unit;

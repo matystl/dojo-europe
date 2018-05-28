@@ -1,5 +1,10 @@
-Dojo World Edition® starter project
----
+# Interesting titbits of this solution:
+
+1.  Fetcher return record instead of `[@bs.deriving abstract]`
+2.  `react-simple-maps` has complex api so there exist custom javascript component that hide all complexity without need to bindind to original library and expect just array of location and draw everything
+3.  to enable custom javascript with JSX in our wraping component i used `parcel index.html` see https://parceljs.org/
+
+## Dojo World Edition® starter project
 
 Hey everyone, welcome to the biggest Dojo yet! We have 25 cities across Europe (and a few other places) all organizing a local Dojo and this project will (literally) connect all of us together.
 
@@ -12,13 +17,14 @@ To get the locations of everyone, you should send a GET request to `https://imme
 To send your username send a POST request `https://immense-river-25513.herokuapp.com/add-location` with the body being just a string that's your username. The backend will figure out your location and store it.
 
 A high level plan might look like:
-1) clone this repo
-2) setup ReasonReact and get a hello world working
-3) look at react-simple-maps, write bindings to it (look at the [interop](https://reasonml.github.io/reason-react/docs/en/interop.html)) and get a dummy map working
-4) Fetch the data from the backend
-5) Draw markers for each team
 
-*hint hint*: You should probably do some sort of polling at a regular interval to get the data as people finish the dojo ;)
+1.  clone this repo
+2.  setup ReasonReact and get a hello world working
+3.  look at react-simple-maps, write bindings to it (look at the [interop](https://reasonml.github.io/reason-react/docs/en/interop.html)) and get a dummy map working
+4.  Fetch the data from the backend
+5.  Draw markers for each team
+
+_hint hint_: You should probably do some sort of polling at a regular interval to get the data as people finish the dojo ;)
 
 This starter project only contains a bit of hairy fetching logic with promises, all you need to care about is calling `fetchGet` and `fetchPost`.
 
